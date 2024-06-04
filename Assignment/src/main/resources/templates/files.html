@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Files</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+</head>
+<body>
+    <h2>Your Files</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Download</th>
+            <th>Share</th>
+        </tr>
+        <tr th:each="file : ${files}">
+            <td th:text="${file.name}">File Name</td>
+            <td><a th:href="@{/api/files/download/{id}(id=${file.id})}">Download</a></td>
+            <td>
+                <form th:action="@{/api/files/share}" method="post">
+                    <input type="hidden" name="fileId" th:value="${file.id}"/>
+                    <input type="text" name="username" placeholder="Enter username"/>
+                    <button type="submit">Share</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/upload}">Upload New File</a>
+</body>
+</html>
