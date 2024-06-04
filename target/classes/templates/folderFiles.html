@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Folder Files</title>
+</head>
+<body>
+    <h1>Files in Folder: <span th:text="${folder.name}"></span></h1>
+    <table>
+        <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Upload Date</th>
+            <th>Download</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="file : ${files}">
+            <td th:text="${file.name}"></td>
+            <td th:text="${#dates.format(file.uploadDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <a th:href="@{/api/files/{id}(id=${file.id})}">Download</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/api/folders">Back to Folders</a>
+</body>
+</html>
+    

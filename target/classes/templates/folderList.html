@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Folder List</title>
+</head>
+<body>
+    <h1>Your Folders</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Folder Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="folder : ${folders}">
+            <td th:text="${folder.name}"></td>
+            <td>
+                <a th:href="@{/api/folders/{id}(id=${folder.id})}">View Files</a>
+                <form th:action="@{/api/folders/{id}/delete(id=${folder.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/api/folders/create">Create New Folder</a>
+</body>
+</html>
